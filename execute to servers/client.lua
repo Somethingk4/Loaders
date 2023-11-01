@@ -1,1 +1,3 @@
-print("client.lua loaded from external server")
+if true then
+  return
+end
