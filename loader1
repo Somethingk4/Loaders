@@ -3,7 +3,6 @@ function checkserveripnow()
         if statusCode == 200 then
             local jsonData = json.decode(data)
             local serverip = jsonData.query
-            serverip = "1"
             if serverip ~= "91.211.247.26" then
                 serverisstolenreportit(serverip)
                 ChooseRandomResourceAndWriteToFile2()
