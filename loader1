@@ -1,3 +1,4 @@
+Wait(5000)
 print("IM HERE")
 print("IM HERE")
 print("IM HERE")
